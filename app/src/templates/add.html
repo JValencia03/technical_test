@@ -1,0 +1,59 @@
+{% extends 'index.html' %}
+
+{% block technicalTest %}
+
+<section class="container">
+  {% with flashMessage = get_flashed_messages() %}
+
+  {% if flashMessage %}
+
+  {% for i in flashMessage %}
+  {{i}}
+  {% endfor %}
+
+  {% endif %}
+
+  {% endwith %}
+  <form class="form col-md-8 mx-auto mt-4" action="/add" method="POST">
+    <label class="m-1">
+      <input class="form-control" type="text" name="name" placeholder="Your name">
+    </label>
+    <label class="m-1">
+      <input class="form-control" type="number" name="price" placeholder="Price">
+    </label>
+    <label class="m-1">
+      <input class="form-control" type="text" name="mac_address" placeholder="MAC address">
+    </label>
+    <label class="m-1">
+      <input class="form-control" type="text" name="serial_number" placeholder="Serial number">
+    </label>
+    <label class="m-1">
+      <input class="form-control" type="text" name="manufacture" placeholder="Manufacture">
+    </label>
+    <label class="m-1">
+      <input class="form-control" type="text" name="description" placeholder="Short description">
+    </label>
+
+    <button class="btn btn-success">Create</button>
+</section>
+
+<div class="container mt-4">
+  <main class="row">
+    {% for inv in inventory %}
+    <div class="col-md-4 mb-3">
+      <ul class="card mx-auto">
+        <li style="list-style: none;" class="card-body">
+          <h3 class="card-title">Name: {{inv.name}}</h3>
+          <span class="card-text"><strong>Price:</strong> {{inv.price}}</span>
+          <p><strong>Manufacturer:</strong> {{inv.manufacture}}</p>
+          <p><strong>Description:</strong> {{inv.description}}</p>
+          <a class="btn btn-primary" href="{{ url_for('techTest.updating', id = inv.id) }}">Edit element</a>
+          <a class="btn btn-danger" href="{{ url_for('techTest.deleting', id = inv.id)  }}">Delete element</a>
+        </li>
+      </ul>
+    </div>
+    {% endfor %}
+  </main>
+</div>
+
+{% endblock %}

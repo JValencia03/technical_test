@@ -1,0 +1,9 @@
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.log
+
+# Podría dejarlo porque pues es un test, pero igual lo quito
+.env
